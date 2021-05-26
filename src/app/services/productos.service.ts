@@ -16,8 +16,12 @@ export class ProductosService {
     return this.http.get(`${this.url}listar`);
   }
 
-  nuevo(producto: any) {
-    return this.http.post(`${this.url}`, producto);    
+  nuevo(producto: any, photo: File) {
+    const fd = new FormData();
+    fd.append('descripcion', producto.descripcion);
+    fd.append('precio', producto.precio.toString());
+    fd.append('image', photo);
+    return this.http.post(`${this.url}`, fd);
   }
 
   eliminar(codigo: any) {
